@@ -27,7 +27,7 @@ class TestCustomLinkedList {
         ll.addElementInTheBeginning(30);
         ll.addElementInTheBeginning(40);
 
-        ll.printAllValuesInOrder();
+        log.info(ll.toString());
     }
 
     @Test
@@ -38,7 +38,7 @@ class TestCustomLinkedList {
         ll.addElementInTheEnd(70);
         ll.addElementInTheEnd(80);
 
-        ll.printAllValuesInOrder();
+        log.info(ll.toString());
     }
 
     @Test
@@ -52,7 +52,7 @@ class TestCustomLinkedList {
         log.info(String.valueOf(ll.addElementInTheGivenPosition(100, 2)));
         log.info(String.valueOf(ll.addElementInTheGivenPosition(0, 1)));
 
-        ll.printAllValuesInOrder();
+        log.info(ll.toString());
     }
 
     @Test
@@ -65,7 +65,7 @@ class TestCustomLinkedList {
 
         ll.removeAnElementAtTheBeginning();
 
-        ll.printAllValuesInOrder();
+        log.info(ll.toString());
         Assertions.assertFalse(ll.contains(10));
     }
 
@@ -80,7 +80,7 @@ class TestCustomLinkedList {
         ll.removeAnElementAtTheEnd();
         Assertions.assertFalse(ll.contains(40));
 
-        ll.printAllValuesInOrder();
+        log.info(ll.toString());
     }
 
     @Test
@@ -94,7 +94,7 @@ class TestCustomLinkedList {
         log.info(String.valueOf(ll.removeElementAtAGivenPosition(2)));
         Assertions.assertFalse(ll.contains(30));
 
-        ll.printAllValuesInOrder();
+        log.info(ll.toString());
     }
 
     @Test
@@ -107,7 +107,7 @@ class TestCustomLinkedList {
 
         log.info(String.valueOf(ll.removeElementAtAGivenPosition(4)));
 
-        ll.printAllValuesInOrder();
+        log.info(ll.toString());
     }
 
     @Test
@@ -121,7 +121,7 @@ class TestCustomLinkedList {
         log.info(String.valueOf(ll.addElementInTheGivenPosition(100, 4)));
         Assertions.assertTrue(ll.contains(100));
 
-        ll.printAllValuesInOrder();
+        log.info(ll.toString());
     }
 
     @Test
@@ -135,8 +135,7 @@ class TestCustomLinkedList {
         ll.removeAKeyFromTheList(keyToRemove);
         Assertions.assertFalse(ll.contains(30));
 
-        ll.printAllValuesInOrder();
-
+        log.info(ll.toString());
     }
 
 }

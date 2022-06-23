@@ -72,9 +72,11 @@ public class CustomLinkedList {
 
         if (null == head || pos == 0) {
             addElementInTheBeginning(val);
+            return true;
         }
         if (pos == size) {
             addElementInTheEnd(val);
+            return true;
         }
 
         int count = 0;
@@ -177,6 +179,28 @@ public class CustomLinkedList {
             log.info("{}", temp.data);
             temp = temp.next;
         }
+    }
+
+    @Override
+    public String toString() {
+
+        if (null == head) {
+            return "[]";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+
+        Node temp = head;
+        while (null != temp) {
+            sb.append(temp.data);
+            if (null != temp.next) {
+                sb.append(", ");
+            }
+            temp = temp.next;
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }
 
