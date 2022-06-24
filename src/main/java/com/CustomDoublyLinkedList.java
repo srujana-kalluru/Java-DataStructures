@@ -125,6 +125,7 @@ public class CustomDoublyLinkedList {
                 if (temp.next.data == key) {
                     temp.next = temp.next.next;
                     temp.next.prev = temp;
+                    size--;
                     return;
                 }
             }
