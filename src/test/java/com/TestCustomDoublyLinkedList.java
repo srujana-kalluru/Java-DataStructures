@@ -44,18 +44,18 @@ class TestCustomDoublyLinkedList {
 
     @Test
     void testAddElementAtAGivenPosition() {
-        CustomDoublyLinkedList ll = new CustomDoublyLinkedList();
-        ll.addAnElementInTheEnd(10);
-        ll.addAnElementInTheEnd(20);
-        ll.addAnElementInTheEnd(30);
-        ll.addAnElementInTheEnd(40);
+        CustomDoublyLinkedList dll = new CustomDoublyLinkedList();
+        dll.addAnElementInTheEnd(10);
+        dll.addAnElementInTheEnd(20);
+        dll.addAnElementInTheEnd(30);
+        dll.addAnElementInTheEnd(40);
 
-        ll.addElementInTheGivenPosition(100, 2);
+        dll.addElementInTheGivenPosition(100, 2);
 
-        assertTrue(ll.contains(100));
+        assertTrue(dll.contains(100));
 
-        log.info(ll.toString());
-        log.info(ll.toReverseString());
+        log.info(dll.toString());
+        log.info(dll.toReverseString());
     }
 
     @Test

@@ -57,22 +57,22 @@ public class CustomDoublyLinkedList {
             return;
         }
 
-        Node nodeToInsert = new Node();
-        nodeToInsert.data = val;
+        Node temp = new Node();
+        temp.data = val;
         int count = 0;
 
-        Node temp = head;
+        Node last = head;
 
         while (count < pos - 1) {
             count++;
-            temp = temp.next;
+            last = last.next;
         }
 
-        nodeToInsert.next = temp.next;
-        nodeToInsert.prev = temp;
+        temp.next = last.next;
+        temp.prev = last;
 
-        temp.next.prev = nodeToInsert;
-        temp.next = nodeToInsert;
+        last.next.prev = temp;
+        last.next = temp;
 
         size++;
     }
@@ -91,6 +91,7 @@ public class CustomDoublyLinkedList {
             while (null != temp.next.next) {
                 temp = temp.next;
             }
+
             temp.next = null;
             size--;
         }
