@@ -90,9 +90,12 @@ class TestCustomLinkedList {
         ll.addElementInTheEnd(20);
         ll.addElementInTheEnd(30);
         ll.addElementInTheEnd(40);
+        ll.addElementInTheEnd(50);
+        ll.addElementInTheEnd(60);
+        ll.addElementInTheEnd(70);
 
-        log.info(String.valueOf(ll.removeElementAtAGivenPosition(2)));
-        Assertions.assertFalse(ll.contains(30));
+        log.info(String.valueOf(ll.removeElementAtAGivenPosition(5)));
+        Assertions.assertFalse(ll.contains(60));
 
         log.info(ll.toString());
     }
@@ -137,5 +140,4 @@ class TestCustomLinkedList {
 
         log.info(ll.toString());
     }
-
 }

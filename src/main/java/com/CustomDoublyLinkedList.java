@@ -1,31 +1,6 @@
 package com;
 
-import java.util.LinkedList;
-
 public class CustomDoublyLinkedList {
-
-
-    public void removeElementAtAGivenPosition(int pos) {
-        if (pos < 0 || pos > size) {
-            return;
-        } else {
-            if (pos == 0) {
-                removeAnElementAtTheBeginning();
-            } else if (pos == size) {
-                removeAnElementAtTheEnd();
-            } else {
-                int count = 0;
-                Node temp = head;
-                while (count < pos - 1) {
-                    count++;
-                    temp = temp.next;
-                }
-                temp.next = temp.next.next;
-                temp.next.prev = temp;
-                size--;
-            }
-        }
-    }
 
     class Node {
         int data;
@@ -37,7 +12,6 @@ public class CustomDoublyLinkedList {
     int size;
 
     public void addAnElementInTheBeginning(int val) {
-        LinkedList l;
         Node temp = new Node();
         temp.data = val;
 
@@ -104,9 +78,7 @@ public class CustomDoublyLinkedList {
     }
 
     public void removeAnElementAtTheBeginning() {
-        if (null == head) {
-            return;
-        } else {
+        if (null != head) {
             head = head.next;
             head.prev = null;
             size--;
@@ -114,9 +86,7 @@ public class CustomDoublyLinkedList {
     }
 
     public void removeAnElementAtTheEnd() {
-        if (null == head) {
-            return;
-        } else {
+        if (null != head) {
             Node temp = head;
             while (null != temp.next.next) {
                 temp = temp.next;
@@ -124,6 +94,54 @@ public class CustomDoublyLinkedList {
             temp.next = null;
             size--;
         }
+    }
+
+    public void removeElementAtAGivenPosition(int pos) {
+        if (pos < 0 || pos > size) {
+            return;
+        }
+
+        if (pos == 0) {
+            removeAnElementAtTheBeginning();
+        } else if (pos == size) {
+            removeAnElementAtTheEnd();
+        } else {
+            int count = 0;
+            Node temp = head;
+            while (count < pos - 1) {
+                count++;
+                temp = temp.next;
+            }
+            temp.next = temp.next.next;
+            temp.next.prev = temp;
+            size--;
+        }
+    }
+
+    public void removeAKeyFromTheList(int key) {
+        if (null != head) {
+            Node temp = head;
+            while (null != temp.next) {
+                if (temp.next.data == key) {
+                    temp.next = temp.next.next;
+                    temp.next.prev = temp;
+                    return;
+                }
+            }
+        }
+    }
+
+    public boolean contains(int key) {
+        Node temp = head;
+
+        while (null != temp.next) {
+            if (key == temp.data) {
+                return true;
+            }
+            temp = temp.next;
+        }
+
+        return false;
     }
 
     @Override
@@ -170,6 +188,3 @@ public class CustomDoublyLinkedList {
 
     }
 }
-
-
-

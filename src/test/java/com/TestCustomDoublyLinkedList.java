@@ -3,8 +3,18 @@ package com;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @Slf4j
 class TestCustomDoublyLinkedList {
+
+    @Test
+    void testEmptyList() {
+        CustomDoublyLinkedList dll = new CustomDoublyLinkedList();
+        log.info(dll.toString());
+        log.info(dll.toReverseString());
+    }
 
     @Test
     void testAddElementInTheBeginning() {
@@ -42,6 +52,8 @@ class TestCustomDoublyLinkedList {
 
         ll.addElementInTheGivenPosition(100, 2);
 
+        assertTrue(ll.contains(100));
+
         log.info(ll.toString());
         log.info(ll.toReverseString());
     }
@@ -56,9 +68,10 @@ class TestCustomDoublyLinkedList {
 
         dll.removeAnElementAtTheBeginning();
 
+        assertFalse(dll.contains(10));
+
         log.info(dll.toString());
         log.info(dll.toReverseString());
-
     }
 
     @Test
@@ -70,6 +83,41 @@ class TestCustomDoublyLinkedList {
         dll.addAnElementInTheEnd(40);
 
         dll.removeAnElementAtTheEnd();
+        assertFalse(dll.contains(40));
+
+        log.info(dll.toString());
+        log.info(dll.toReverseString());
+    }
+
+    @Test
+    void testRemoveElementAtAGivenPosition() {
+        CustomDoublyLinkedList dll = new CustomDoublyLinkedList();
+        dll.addAnElementInTheEnd(10);
+        dll.addAnElementInTheEnd(20);
+        dll.addAnElementInTheEnd(30);
+        dll.addAnElementInTheEnd(40);
+
+        dll.removeElementAtAGivenPosition(2);
+        assertFalse(dll.contains(30));
+
+        log.info(dll.toString());
+        log.info(dll.toReverseString());
+    }
+
+    @Test
+    void testRemoveAKeyFromTheList() {
+        CustomDoublyLinkedList dll = new CustomDoublyLinkedList();
+        dll.addAnElementInTheEnd(10);
+        dll.addAnElementInTheEnd(20);
+        dll.addAnElementInTheEnd(30);
+        dll.addAnElementInTheEnd(40);
+        dll.addAnElementInTheEnd(50);
+        dll.addAnElementInTheEnd(60);
+        dll.addAnElementInTheEnd(70);
+
+        dll.removeAKeyFromTheList(20);
+        assertFalse(dll.contains(20));
+
 
         log.info(dll.toString());
         log.info(dll.toReverseString());
@@ -77,15 +125,21 @@ class TestCustomDoublyLinkedList {
     }
 
     @Test
-    void testRemoveElementAtAGivenPosition(){
+    void testContains() {
         CustomDoublyLinkedList dll = new CustomDoublyLinkedList();
         dll.addAnElementInTheEnd(10);
         dll.addAnElementInTheEnd(20);
         dll.addAnElementInTheEnd(30);
         dll.addAnElementInTheEnd(40);
-        dll.removeElementAtAGivenPosition(2);
+        dll.addAnElementInTheEnd(50);
+        dll.addAnElementInTheEnd(60);
+        dll.addAnElementInTheEnd(70);
+
+        assertFalse(dll.contains(80));
+        assertTrue(dll.contains(50));
 
         log.info(dll.toString());
         log.info(dll.toReverseString());
+
     }
 }
