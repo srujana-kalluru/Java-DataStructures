@@ -1,6 +1,8 @@
-package com;
+package com.impl;
 
-public class CustomDoublyLinkedList {
+import com.DoublyLinkedList;
+
+public class DoublyLinkedListImpl implements DoublyLinkedList {
 
     class Node {
         int data;
@@ -11,27 +13,27 @@ public class CustomDoublyLinkedList {
     Node head;
     int size;
 
-    public void addAnElementInTheBeginning(int val) {
+    public boolean addAnElementInTheBeginning(int val) {
         Node temp = new Node();
         temp.data = val;
 
         if (null == head) {
             head = temp;
-            return;
         } else {
             head.prev = temp;
             temp.next = head;
             head = temp;
         }
         size++;
+        return true;
     }
 
-    public void addAnElementInTheEnd(int val) {
+    @Override
+    public boolean addAnElementInTheEnd(int val) {
         Node temp = new Node();
         temp.data = val;
         if (null == head) {
             head = temp;
-            return;
         } else {
             Node last = head;
             while (null != last.next) {
@@ -39,53 +41,57 @@ public class CustomDoublyLinkedList {
             }
             temp.prev = last;
             last.next = temp;
-
         }
         size++;
+        return true;
     }
 
-    public void addElementInTheGivenPosition(int val, int pos) {
+    @Override
+    public boolean addAnElementAtAGivenPosition(int val, int pos) {
         if (pos < 0 || pos > size) {
-            return;
+            return false;
+        } else if (pos == 0) {
+            return addAnElementInTheBeginning(val);
+        } else if (pos == size) {
+            return addAnElementInTheEnd(val);
+        } else {
+            Node temp = new Node();
+            temp.data = val;
+            int count = 0;
+
+            Node last = head;
+
+            while (count < pos - 1) {
+                count++;
+                last = last.next;
+            }
+
+            temp.next = last.next;
+            temp.prev = last;
+
+            last.next.prev = temp;
+            last.next = temp;
+
+            size++;
+            return true;
         }
-        if (pos == 0) {
-            addAnElementInTheBeginning(val);
-            return;
-        }
-        if (pos == size) {
-            addAnElementInTheEnd(val);
-            return;
-        }
 
-        Node temp = new Node();
-        temp.data = val;
-        int count = 0;
 
-        Node last = head;
-
-        while (count < pos - 1) {
-            count++;
-            last = last.next;
-        }
-
-        temp.next = last.next;
-        temp.prev = last;
-
-        last.next.prev = temp;
-        last.next = temp;
-
-        size++;
     }
 
-    public void removeAnElementAtTheBeginning() {
+    @Override
+    public boolean removeAnElementInTheBeginning() {
         if (null != head) {
             head = head.next;
             head.prev = null;
             size--;
+            return true;
         }
+        return false;
     }
 
-    public void removeAnElementAtTheEnd() {
+    @Override
+    public boolean removeAnElementInTheEnd() {
         if (null != head) {
             Node temp = head;
             while (null != temp.next.next) {
@@ -94,18 +100,21 @@ public class CustomDoublyLinkedList {
 
             temp.next = null;
             size--;
+            return true;
         }
+        return false;
     }
 
-    public void removeElementAtAGivenPosition(int pos) {
+    @Override
+    public boolean removeElementAtAGivenPosition(int pos) {
         if (pos < 0 || pos > size) {
-            return;
+            return false;
         }
 
         if (pos == 0) {
-            removeAnElementAtTheBeginning();
+            return removeAnElementInTheBeginning();
         } else if (pos == size) {
-            removeAnElementAtTheEnd();
+            return removeAnElementInTheEnd();
         } else {
             int count = 0;
             Node temp = head;
@@ -116,6 +125,7 @@ public class CustomDoublyLinkedList {
             temp.next = temp.next.next;
             temp.next.prev = temp;
             size--;
+            return true;
         }
     }
 
@@ -125,10 +135,11 @@ public class CustomDoublyLinkedList {
             while (null != temp.next) {
                 if (temp.next.data == key) {
                     temp.next = temp.next.next;
-                    temp.next.prev = temp;
+                    if (null != temp.next) temp.next.prev = temp;
                     size--;
                     return;
                 }
+                temp = temp.next;
             }
         }
     }

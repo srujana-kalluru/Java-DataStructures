@@ -1,5 +1,6 @@
 package com;
 
+import com.impl.DoublyLinkedListImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -7,18 +8,18 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
-class TestCustomDoublyLinkedList {
+class TestDoublyLinkedListImpl {
 
     @Test
     void testEmptyList() {
-        CustomDoublyLinkedList dll = new CustomDoublyLinkedList();
+        DoublyLinkedListImpl dll = new DoublyLinkedListImpl();
         log.info(dll.toString());
         log.info(dll.toReverseString());
     }
 
     @Test
     void testAddElementInTheBeginning() {
-        CustomDoublyLinkedList dll = new CustomDoublyLinkedList();
+        DoublyLinkedListImpl dll = new DoublyLinkedListImpl();
         dll.addAnElementInTheBeginning(10);
         dll.addAnElementInTheBeginning(20);
         dll.addAnElementInTheBeginning(30);
@@ -31,7 +32,7 @@ class TestCustomDoublyLinkedList {
 
     @Test
     void testAddElementInTheEnd() {
-        CustomDoublyLinkedList dll = new CustomDoublyLinkedList();
+        DoublyLinkedListImpl dll = new DoublyLinkedListImpl();
         dll.addAnElementInTheEnd(10);
         dll.addAnElementInTheEnd(20);
         dll.addAnElementInTheEnd(30);
@@ -44,13 +45,13 @@ class TestCustomDoublyLinkedList {
 
     @Test
     void testAddElementAtAGivenPosition() {
-        CustomDoublyLinkedList dll = new CustomDoublyLinkedList();
+        DoublyLinkedListImpl dll = new DoublyLinkedListImpl();
         dll.addAnElementInTheEnd(10);
         dll.addAnElementInTheEnd(20);
         dll.addAnElementInTheEnd(30);
         dll.addAnElementInTheEnd(40);
 
-        dll.addElementInTheGivenPosition(100, 2);
+        dll.addAnElementAtAGivenPosition(100, 2);
 
         assertTrue(dll.contains(100));
 
@@ -60,13 +61,13 @@ class TestCustomDoublyLinkedList {
 
     @Test
     void testRemoveAnElementInTheBeginning() {
-        CustomDoublyLinkedList dll = new CustomDoublyLinkedList();
+        DoublyLinkedListImpl dll = new DoublyLinkedListImpl();
         dll.addAnElementInTheEnd(10);
         dll.addAnElementInTheEnd(20);
         dll.addAnElementInTheEnd(30);
         dll.addAnElementInTheEnd(40);
 
-        dll.removeAnElementAtTheBeginning();
+        dll.removeAnElementInTheBeginning();
 
         assertFalse(dll.contains(10));
 
@@ -76,13 +77,13 @@ class TestCustomDoublyLinkedList {
 
     @Test
     void testRemoveAnElementInTheEnd() {
-        CustomDoublyLinkedList dll = new CustomDoublyLinkedList();
+        DoublyLinkedListImpl dll = new DoublyLinkedListImpl();
         dll.addAnElementInTheEnd(10);
         dll.addAnElementInTheEnd(20);
         dll.addAnElementInTheEnd(30);
         dll.addAnElementInTheEnd(40);
 
-        dll.removeAnElementAtTheEnd();
+        dll.removeAnElementInTheEnd();
         assertFalse(dll.contains(40));
 
         log.info(dll.toString());
@@ -91,7 +92,7 @@ class TestCustomDoublyLinkedList {
 
     @Test
     void testRemoveElementAtAGivenPosition() {
-        CustomDoublyLinkedList dll = new CustomDoublyLinkedList();
+        DoublyLinkedListImpl dll = new DoublyLinkedListImpl();
         dll.addAnElementInTheEnd(10);
         dll.addAnElementInTheEnd(20);
         dll.addAnElementInTheEnd(30);
@@ -106,7 +107,7 @@ class TestCustomDoublyLinkedList {
 
     @Test
     void testRemoveAKeyFromTheList() {
-        CustomDoublyLinkedList dll = new CustomDoublyLinkedList();
+        DoublyLinkedListImpl dll = new DoublyLinkedListImpl();
         dll.addAnElementInTheEnd(10);
         dll.addAnElementInTheEnd(20);
         dll.addAnElementInTheEnd(30);
@@ -116,7 +117,10 @@ class TestCustomDoublyLinkedList {
         dll.addAnElementInTheEnd(70);
 
         dll.removeAKeyFromTheList(20);
+        dll.removeAKeyFromTheList(70);
+
         assertFalse(dll.contains(20));
+        assertFalse(dll.contains(70));
 
 
         log.info(dll.toString());
@@ -126,7 +130,7 @@ class TestCustomDoublyLinkedList {
 
     @Test
     void testContains() {
-        CustomDoublyLinkedList dll = new CustomDoublyLinkedList();
+        DoublyLinkedListImpl dll = new DoublyLinkedListImpl();
         dll.addAnElementInTheEnd(10);
         dll.addAnElementInTheEnd(20);
         dll.addAnElementInTheEnd(30);

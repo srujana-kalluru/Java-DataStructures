@@ -1,9 +1,10 @@
-package com;
+package com.impl;
 
+import com.LinkedList;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class CustomLinkedList {
+public class LinkedListImpl implements LinkedList {
 
     class Node {
         int data;
@@ -30,52 +31,56 @@ public class CustomLinkedList {
 
     }
 
-    public void addElementInTheBeginning(int val) {
+    @Override
+    public boolean addAnElementInTheBeginning(int val) {
         if (null == head) {
             head = new Node();
             head.data = val;
-            size++;
-            return;
         }
 
-        Node temp = new Node();
-        temp.data = val;
-        temp.next = head;
-        head = temp;
+        else {
+            Node temp = new Node();
+            temp.data = val;
+            temp.next = head;
+            head = temp;
+        }
         size++;
+        return true;
     }
 
-    public void addElementInTheEnd(int val) {
+    @Override
+    public boolean addAnElementInTheEnd(int val) {
         Node last = new Node();
         last.data = val;
 
         if (null == head) {
             head = last;
-            size++;
-            return;
         }
+        else {
+            Node temp = head;
 
-        Node temp = head;
-
-        while (null != temp.next) {
-            temp = temp.next;
+            while (null != temp.next) {
+                temp = temp.next;
+            }
+            temp.next = last;
         }
-        temp.next = last;
         size++;
+        return true;
     }
 
 
-    public boolean addElementInTheGivenPosition(int val, int pos) {
+    @Override
+    public boolean addAnElementAtAGivenPosition(int val, int pos) {
         if (pos < 0 || pos > size) {
             return false;
         }
 
         if (null == head || pos == 0) {
-            addElementInTheBeginning(val);
+            addAnElementInTheBeginning(val);
             return true;
         }
         if (pos == size) {
-            addElementInTheEnd(val);
+            addAnElementInTheEnd(val);
             return true;
         }
 
@@ -97,7 +102,8 @@ public class CustomLinkedList {
 
     }
 
-    public boolean removeAnElementAtTheBeginning() {
+    @Override
+    public boolean removeAnElementInTheBeginning() {
         if (null == head) {
             return false;
         }
@@ -107,7 +113,8 @@ public class CustomLinkedList {
 
     }
 
-    public boolean removeAnElementAtTheEnd() {
+    @Override
+    public boolean removeAnElementInTheEnd() {
         if (null == head) {
             return false;
         }
@@ -124,15 +131,16 @@ public class CustomLinkedList {
 
     }
 
+    @Override
     public boolean removeElementAtAGivenPosition(int pos) {
         if (null == head || pos >= size || pos < 0) {
             return false;
         }
         if (pos == 0) {
-            removeAnElementAtTheBeginning();
+            removeAnElementInTheBeginning();
         }
         if (pos == size - 1) {
-            removeAnElementAtTheEnd();
+            removeAnElementInTheEnd();
         }
 
         Node temp = head;
@@ -149,21 +157,16 @@ public class CustomLinkedList {
 
 
     public boolean removeAKeyFromTheList(int key) {
-        if (null == head) {
-            return false;
-        }
-        if (head.data == key) {
-            removeAnElementAtTheBeginning();
-        }
-        Node temp = head;
-
-        while (null != (temp.next).next) {
-            if ((temp.next).data == key) {
-                temp.next = temp.next.next;
-                size--;
-                return true;
+        if (null != head) {
+            Node temp = head;
+            while (null != temp.next) {
+                if (temp.next.data == key) {
+                    temp.next = temp.next.next;
+                    size--;
+                    return true;
+                }
+                temp = temp.next;
             }
-            temp = temp.next;
         }
         return false;
     }
